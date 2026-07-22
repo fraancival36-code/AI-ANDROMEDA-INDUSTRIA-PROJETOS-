@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ANDRÔMEDA | Inteligência Industrial</title>
+    <meta name="theme-color" content="#4D94FF">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {margin: 0; padding: 0; box-sizing: border-box;}
+        html, body {
+            width: 100%; min-height: 100vh;
+            background: #050B18 !important; color: #E0E7FF !important;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+        .bg-sistema {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(77,148,255,0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(140,90,255,0.1) 0%, transparent 50%),
+                linear-gradient(rgba(77,148,255,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(77,148,255,0.03) 1px, transparent 1px);
+            background-size: 100% 100%, 100% 100%, 32px 32px, 32px 32px;
+            z-index: -1;
+        }
+        header {
+            width: 100%; padding: 12px 5%;
+            background: rgba(8,14,24,0.95);
+            border-bottom: 1px solid #233554;
+            text-align: center;
+        }
+        header h1 {font-family: 'Orbitron', sans-serif; font-size: 21px; color: #4D94FF; font-weight: 800;}
+        header p {font-size: 11px; color: #A0A9B8; margin-top: 3px;}
+        header .autor {font-size: 10px; color: #707DA0; margin-top: 2px; font-weight: 500;}
+        main {padding: 12px 5% 80px 5%;}
+
+        /* --- BOTÃO BALANÇO GERAL --- */
+        .botao-balanco {
+            width: 100%; padding: 12px; margin-bottom: 15px;
+            background: linear-gradient(135deg, #4D94FF, #2563EB);
+            border: none; border-radius: 1rem;
+            color: white; font-family: 'Orbitron', sans-serif; font-size: 15px; font-weight: 700;
+            cursor: pointer; text-align: center;
+        }
+        .aviso-dados {
+            font-size: 10px; color: #96BCFF; text-align: center; margin-top: 4px;
+        }
+
+        /* --- PAINEL SAÚDE GERAL --- */
+        .painel-saude {
+            background: rgba(77,148,255,0.07); border: 1px solid #4D94FF;
+            border-radius: 1rem; padding: 12px; margin-bottom: 15px;
+        }
+        .titulo-saude {font-family: 'Orbitron', sans-serif; font-size: 15px; text-align: center; margin-bottom: 10px; color: #96BCFF;}
+        .grid-saude {display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px;}
+        .item-saude {
+            background: rgba(255,255,255,0.04); border-radius: 0.8rem; padding: 8px 5px;
+            text-align: center; font-size: 0.85rem; font-weight: 600;
+        }
+        .indicador-vazio {color: #607090; font-style: italic;}
+
+        /* --- EXPLICAÇÃO DO SISTEMA --- */
+        .explicacao {
+            background: rgba(140,90,255,0.06); border: 1px solid #8C5AFF;
+            border-radius: 1rem; padding: 12px; margin: 15px 0;
+            text-align: center; font-size: 0.85rem; line-height: 1.3;
+        }
+        .explicacao strong {color: #C4B5FF;}
+
+        h2 {font-family: 'Orbitron', sans-serif; font-size: 16px; color: #4D94FF; margin: 15px 0 8px 0;}
+
+        /* --- TODOS OS MÓDULOS DAS IAS --- */
+        .grid-modulos {
+            display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.7rem; margin-bottom: 12px;
+        }
+        .modulo {
+            background: rgba(74,158,255,0.07); border: 1px solid rgba(77,148,255,0.35);
+            border-radius: 1rem; padding: 0.9rem 0.7rem;
+            text-align: center; min-height: 110px;
+            display: flex; flex-direction: column; justify-content: center;
+        }
+        .modulo .icon {font-size: 1.9rem; margin-bottom: 0.3rem;}
+        .modulo .nome {font-size: 0.9rem; font-weight: 700; margin-bottom: 0.15rem;}
+        .modulo .funcoes {font-size: 0.7rem; color: #A0A9B8; line-height: 1.15;}
+
+        /* --- RODAPÉ --- */
+        nav.nav-bottom {
+            position: fixed; bottom: 0; left: 0; width: 100%;
+            background: rgba(8,14,24,0.96); border-top: 1px solid #233554;
+            display: flex; justify-content: space-around; padding: 7px 0 11px 0; z-index: 10;
+            font-size: 10px;
+        }
+        .nav-item {text-align: center; color: #607090; text-decoration: none;}
+        .nav-item.active {color: #4D94FF; font-weight: 600;}
+        .nav-item .icon {display: block; font-size: 18px; margin-bottom: 2px;}
+    </style>
+</head>
+<body>
+    <div class="bg-sistema"></div>
+    
+    <header>
+        <h1>⚙️ ANDRÔMEDA INDUSTRIAL</h1>
+        <p>Sistema de Inteligência Multiagente Integrada</p>
+        <div class="autor">Criado por: Francival Alves Farias</div>
+    </header>
+
+    <main>
+        <!-- BOTÃO BALANÇO GERAL -->
+        <div class="botao-balanco">📊 VER BALANÇO REAL DA FÁBRICA</div>
+        <div class="aviso-dados">Dados preenchidos automaticamente pelas IAs conforme o dia a dia</div>
+
+        <!-- PAINEL DE SAÚDE GERAL -->
+        <div class="painel-saude">
+            <div class="titulo-saude">📈 ÍNDICE GERAL DE APROVEITAMENTO</div>
+            <div class="grid-saude">
+                <div class="item-saude">🟢 Produção: <span class="indicador-vazio">A definir</span></div>
+                <div class="item-saude">🟢 Estoque: <span class="indicador-vazio">A definir</span></div>
+                <div class="item-saude">🟡 Manutenção: <span class="indicador-vazio">A definir</span></div>
+                <div class="item-saude">🟠 Segurança: <span class="indicador-vazio">A definir</span></div>
+                <div class="item-saude">🟢 Qualidade: <span class="indicador-vazio">A definir</span></div>
+                <div class="item-saude">🟢 Compras: <span class="indicador-vazio">A definir</span></div>
+                <div class="item-saude">🟢 Vendas: <span class="indicador-vazio">A definir</span></div>
+                <div class="item-saude">🟡 Financeiro: <span class="indicador-vazio">A definir</span></div>
+            </div>
+        </div>
+
+        <!-- O QUE MOSTRA NO BALANÇO -->
+        <div class="explicacao">
+            🧠 <strong>No Balanço Geral você verá:</strong><br>
+            • Produzido hoje / Deixou de produzir<br>
+            • Estoque alto • Estoque baixo • Itens faltantes<br>
+            • Situação de vendas e pedidos<br>
+            • Levantamento completo de materiais<br>
+            • Prazo de espera e andamento dos processos<br>
+            • Tudo atualizado em tempo real pelas IAs
+        </div>
+
+        <!-- COMO FUNCIONA -->
+        <div class="explicacao">
+            ✅ <strong>Nada fica sem registro</strong><br>
+            Cada IA acompanha sua área diariamente. O sistema junta tudo e mostra a verdadeira situação da fábrica, sem números inventados.
+        </div>
+
+        <!-- TODOS OS MÓDULOS COMPLETOS -->
+        <h2>🤖 MÓDULOS DAS IAS</h2>
+        <div class="grid-modulos">
+            <div class="modulo">
+                <div class="icon">📦</div>
+                <div class="nome">IA DE ESTOQUE</div>
+                <div class="funcoes">Entradas/saídas • Localização exata • Peças em teste/empréstimo • Alerta de estoque alto/baixo • Aviso antes de faltar</div>
+            </div>
+            <div class="modulo">
+                <div class="icon">🛒</div>
+                <div class="nome">IA DE COMPRAS</div>
+                <div class="funcoes">Melhor preço/fornecedor • Cálculo de necessidade • Evita compras desnecessárias • Acompanhamento de entrega</div>
+            </div>
+            <div class="modulo">
+                <div class="icon">⚙️</div>
+                <div class="nome">IA DE PRODUÇÃO</div>
+                <div class="funcoes">O que foi feito • O que faltou fazer • Cronograma • Cálculo de materiais • Gargalos e atrasos</div>
+            </div>
+            <div class="modulo">
+                <div class="icon">🛠️</div>
+                <div class="nome">IA DE MANUTENÇÃO</div>
+                <div class="funcoes">"Ficha médica da máquina" • Histórico completo • Prevenção de falhas • Custo por equipamento</div>
+            </div>
+            <div class="modulo">
+                <div class="icon">✂️</div>
+                <div class="nome">IA DE OTIMIZAÇÃO</div>
+                <div class="funcoes">Cálculo de chapas, tubos, insumos • Menor desperdício • Melhor aproveitamento</div>
+            </div>
+            <div class="modulo">
+                <div class="icon">🛡️</div>
+                <div class="nome">IA DE SEGURANÇA</div>
+                <div class="funcoes">Registro de riscos • Ocorrências • Ações tomadas • Nada fica sem documentar</div>
+            </div>
+            <div class="modulo">
+                <div class="icon">✅</div>
+                <div class="nome">IA DE QUALIDADE</div>
+                <div class="funcoes">Defeitos • Retrabalho • Padrões • Evita erros repetidos</div>
+            </div>
+            <div class="modulo">
+                <div class="icon">🚚</div>
+                <div class="nome">IA DE VENDAS & LOGÍSTICA</div>
+                <div class="funcoes">Pedidos • Andamento • Prazo de entrega • O que está esperando • Expedição</div>
+            </div>
+            <div class="modulo">
+                <div class="icon">💰</div>
+                <div class="nome">IA FINANCEIRA</div>
+                <div class="funcoes">Custos reais • Margens • Economia gerada • Situação atual</div>
+            </div>
+            <div class="modulo">
+                <div class="icon">👥</div>
+                <div class="nome">IA DE RH</div>
+                <div class="funcoes">Equipe • Treinamentos • Disponibilidade • Habilitações</div>
+            </div>
+        </div>
+    </main>
+
+    <nav class="nav-bottom">
+        <div class="nav-item active"><div class="icon">🏠</div>INÍCIO</div>
+        <div class="nav-item"><div class="icon">📊</div>BALANÇO</div>
+        <div class="nav-item"><div class="icon">🧩</div>MÓDULOS</div>
+        <div class="nav-item"><div class="icon">ℹ️</div>SOBRE</div>
+    </nav>
+</body>
+</html>
